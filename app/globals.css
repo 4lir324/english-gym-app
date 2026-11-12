@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* 🎨 پالت رنگی بر اساس عکس ربات */
+  --color-primary: #6da5bb;       /* آبی بدنه ربات */
+  --color-primary-hover: #568ea3; /* کمی تیره‌تر برای هاور */
+  --color-accent: #f2e8da;        /* کرم (صورت ربات) - برای متن‌ها */
+  --color-bg-dark: #1f3a46;       /* سرمه‌ای دودی (تم کلی) */
+  --color-surface: rgba(255, 255, 255, 0.08); /* شیشه‌ای */
+  --color-danger: #ef7c7c;        /* قرمز ملایم (برای حذف) */
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  /* گرادینت سرمه‌ای دودی به سمت کمی روشن‌تر (مثل فضای پشت ربات) */
+  background: linear-gradient(135deg, #162a33 0%, #2b4c59 100%);
+  background-attachment: fixed;
+  color: var(--color-accent); /* متن کرم */
+  font-family: -apple-system, BlinkMacSystemFont, "Vazirmatn", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+}
+
+/* --- کانتینر اصلی --- */
+.app-container {
+  background: var(--color-surface);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(242, 232, 218, 0.15); /* حاشیه کرم خیلی کمرنگ */
+  border-radius: 40px;
+  padding: 30px 24px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+/* --- هدر --- */
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.brand-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--color-primary); /* آبی ربات */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-shadow: 0 0 15px rgba(109, 165, 187, 0.3);
+}
+
+.profile-chip {
+  background: rgba(242, 232, 218, 0.1); /* کرم شیشه‌ای */
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  cursor: pointer;
+  border: 1px solid rgba(242, 232, 218, 0.2);
+  transition: 0.2s;
+  display: flex; align-items: center; gap: 5px;
+}
+.profile-chip:hover { background: rgba(242, 232, 218, 0.2); }
+
+/* --- مودال تنظیمات --- */
+.settings-overlay {
+  position: fixed; inset: 0; z-index: 40;
+  background: rgba(22, 42, 51, 0.7); /* تم تیره سرمه‌ای */
+  backdrop-filter: blur(5px);
+}
+
+.settings-modal {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  width: 85%;
+  max-width: 350px;
+  background: #1f3a46; /* رنگ پس‌زمینه سالید */
+  border: 1px solid rgba(109, 165, 187, 0.3); /* حاشیه آبی */
+  border-radius: 30px;
+  padding: 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+  display: flex; flex-direction: column; gap: 12px;
+}
+
+.translation-text {
+  font-family: "Vazirmatn", sans-serif;
+  color: #94a3b8;
+  font-size: 0.95rem;
+  direction: rtl;
+  line-height: 1.6;
+}
+
+/* --- ورودی‌ها (Inputs & Selects) --- */
+.input-field {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(242, 232, 218, 0.1);
+  padding: 14px;
+  border-radius: 16px;
+  color: var(--color-accent);
+  width: 100%;
+  outline: none;
+  font-size: 0.9rem;
+  transition: 0.2s;
+  appearance: none;
+}
+.input-field:focus {
+  border-color: var(--color-primary);
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 3px rgba(109, 165, 187, 0.15);
+}
+
+/* --- باکس کلمات (Target Display) --- */
+.target-display {
+  background: rgba(0, 0, 0, 0.2);
+  border: 2px dashed rgba(109, 165, 187, 0.3); /* خط‌چین آبی */
+  border-radius: 24px;
+  min-height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  flex-wrap: wrap;
+  line-height: 1.6;
+}
+
+/* --- دکمه‌ها --- */
+.btn-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+  border-radius: 16px;
+  height: 54px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  transition: transform 0.1s, background 0.2s;
+}
+.btn:active { transform: scale(0.96); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* دکمه اصلی (Generate) - آبی ربات */
+.btn-primary {
+  background: var(--color-primary);
+  color: #162a33; /* متن تیره روی دکمه روشن */
+  grid-column: span 3;
+  box-shadow: 0 8px 20px -5px rgba(109, 165, 187, 0.4);
+}
+.btn-primary:hover { background: var(--color-primary-hover); }
+
+/* دکمه‌های آیکون‌دار */
+.btn-icon {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-primary); /* آیکون‌ها آبی شوند */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.btn-icon:hover { background: rgba(255, 255, 255, 0.1); }
+
+/* --- وضعیت‌ها --- */
+.word-correct { color: #81c784; text-shadow: 0 0 10px rgba(129, 199, 132, 0.3); } /* سبز ملایم */
+.word-error { color: #ef7c7c; text-decoration: underline wavy; } /* قرمز ملایم */
+
+/* --- انیمیشن‌ها --- */
+.pulse-red {
+  background: var(--color-danger) !important;
+  color: white !important;
+  animation: pulse 1s infinite;
+  box-shadow: 0 0 15px rgba(239, 124, 124, 0.6);
+}
+.pulse-orange { color: #f6dba6 !important; animation: spin 1s infinite; } /* زرد کرمی */
+
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleIn { from { transform: translate(-50%, -50%) scale(0.9); opacity: 0; } to { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
+
+/* --- لایه تاریک پشت مودال (Backdrop) --- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(22, 42, 51, 0.7); /* سرمه‌ای تیره */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9998;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* --- خود مودال (هماهنگ با ربات) --- */
+.confirm-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 400px;
+  background: #1f3a46; /* سرمه‌ای دودی */
+  border: 1px solid rgba(109, 165, 187, 0.2); /* حاشیه آبی */
+  border-radius: 32px;
+  padding: 30px;
+  text-align: center;
+  z-index: 9999;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* آیکون سطل آشغال در مودال (قرمز ملایم) */
+.modal-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  background: rgba(239, 124, 124, 0.15);
+  color: var(--color-danger);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+/* دکمه‌های مودال */
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.btn-cancel {
+  flex: 1;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-accent);
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-cancel:hover { background: rgba(255, 255, 255, 0.15); }
+
+.btn-delete {
+  flex: 1;
+  padding: 14px;
+  border-radius: 16px;
+  background: var(--color-danger); /* قرمز ملایم */
+  color: white;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(239, 124, 124, 0.4);
+  transition: 0.2s;
+}
+.btn-delete:hover { filter: brightness(1.1); transform: scale(1.02); }
