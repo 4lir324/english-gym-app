@@ -6,6 +6,10 @@ A small web app for practising English pronunciation. It writes a practice word 
 - **Speech:** [Azure AI Speech](https://learn.microsoft.com/azure/ai-services/speech-service/) reads the text aloud (neural voices) and runs **Pronunciation Assessment** on your recording, with a 0–100 score and per-word feedback.
 - **Works on phones:** installable as a PWA, tested on iOS Safari.
 
+<p align="center">
+  <img src="docs/screenshot.jpg" alt="AI English Gym on a phone: a generated practice sentence with voice, speed, listen, record and translate buttons" width="300">
+</p>
+
 ## Features
 
 - Five difficulty levels, from a single word (A1) up to a C1-vocabulary sentence
