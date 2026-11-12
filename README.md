@@ -55,6 +55,14 @@ Create the first admin account:
 ADMIN_USERNAME=admin ADMIN_PASSWORD='choose-a-long-password' npm run create-admin
 ```
 
+To change an existing user's password later (for example if you lost it), add `--reset`. The role and API keys are left untouched:
+
+```bash
+ADMIN_USERNAME=admin ADMIN_PASSWORD='a-new-long-password' npm run create-admin -- --reset
+```
+
+Tip: type the password with `read -s ADMIN_PASSWORD && export ADMIN_PASSWORD` first so it does not end up in your shell history.
+
 Start the app:
 
 ```bash
